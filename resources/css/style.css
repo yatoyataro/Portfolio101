@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap');
 :root{
-    --light_text: #EFF6E0;
-    --dark_text: #01161E;
+    --light_text: rgb(105, 255, 240);
+    --highlight_text: rgba(255, 18, 46, 0.971);
     --midnight-green: #124559;
 }
 
@@ -88,44 +89,61 @@ body {
 
 
 .shooting_star::before {
-    content: '';
-    position: absolute;
-    top: calc(50% - 1px);
-    right: 0;
-    height: 2px;
-    background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
-    transform: translateX(50%) rotateZ(45deg); /* First diagonal line */
-    border-radius: 100%;
-    animation: shining 3s ease-in-out infinite;
-  }
-  
-  .shooting_star::after {
-    content: '';
-    position: absolute;
-    top: calc(50% - 1px);
-    right: 0;
-    height: 2px;
-    background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
-    transform: translateX(50%) rotateZ(-45deg); /* Second diagonal line */
-    border-radius: 100%;
-    animation: shining 3s ease-in-out infinite;
-  }
+  content: '';
+  position: absolute;
+  top: calc(50% - 1px);
+  right: 0;
+  height: 2px;
+  background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+  transform: translateX(50%) rotateZ(45deg); /* First diagonal line */
+  border-radius: 100%;
+  animation: shining 3s ease-in-out infinite;
+}
 
-  header{
-    font-family: "Poppins", sans-serif;
-    padding: 10px 40px;
-    
-  }
+.shooting_star::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 1px);
+  right: 0;
+  height: 2px;
+  background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+  transform: translateX(50%) rotateZ(-45deg); /* Second diagonal line */
+  border-radius: 100%;
+  animation: shining 3s ease-in-out infinite;
+}
+header{
+  font-family: "Teko", sans-serif;
+  padding: 10px 40px;
+}
+.logo a{
+  font-family: "Teko", sans-serif;
+  color: var(--light_text);
+}
+header a{
+  text-decoration: none;
+  color: var(--light_text);
+}
+.header-container{
+  padding: 10px 20px;
+}
+.menu ul{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  list-style: none;
+  text-align: end;
+  gap: 40px;
+}
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.3rem;
+}
 
-  .header-container{
-    display: flex;
-    flex-direction: row;
-    padding: 10px 20px;
-  }
+main{
+  font-family: "Poppins", sans-serif;
+}
 
-  main{
-    font-family: "Poppins", sans-serif;
-  }
-  
 
   

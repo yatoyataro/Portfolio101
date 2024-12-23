@@ -52,8 +52,7 @@ body {
   margin: 0;
   padding: 0;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   font-family: 'Anton', sans-serif;
 }
   
@@ -66,7 +65,7 @@ body {
 
 .shooting_star {
   rotate: 45deg;
-  position: absolute;
+  position: fixed;
   height: 2px;
   background: linear-gradient(-45deg, rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
   border-radius: 999px;
@@ -122,6 +121,7 @@ header{
 header a{
   text-decoration: none;
   color: var(--light_text);
+  z-index: 5;
 }
 .header-container{
   padding: 10px 20px;
@@ -143,6 +143,10 @@ header a{
 
 main{
   font-family: "Poppins", sans-serif;
+}
+
+section{
+    height: 100vh;
 }
 
 

@@ -1,14 +1,14 @@
 const night = document.querySelector('.night');
 
 // Generate 20 shooting stars with random positions and delays
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 25; i++) {
   const star = document.createElement('div');
   star.classList.add('shooting_star');
 
   // Randomize positions
   const topPosition = Math.random() * 100; // Random percentage for top
   const leftPosition = Math.random() * 100; // Random percentage for left
-  const delay = Math.random() * 5; // Random delay between 0-5 seconds
+  const delay = Math.random() * 9; // Random delay between 0-5 seconds
 
   // Apply the random styles
   star.style.top = `${topPosition}vh`;
@@ -18,3 +18,5 @@ for (let i = 0; i < 20; i++) {
 
   night.appendChild(star);
 }
+
+

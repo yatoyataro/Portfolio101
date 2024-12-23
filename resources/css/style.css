@@ -110,6 +110,22 @@ body {
     border-radius: 100%;
     animation: shining 3s ease-in-out infinite;
   }
+
+  header{
+    font-family: "Poppins", sans-serif;
+    padding: 10px 40px;
+    
+  }
+
+  .header-container{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+  }
+
+  main{
+    font-family: "Poppins", sans-serif;
+  }
   
 
   

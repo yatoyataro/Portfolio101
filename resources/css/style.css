@@ -223,7 +223,6 @@ section .home-card h1, section .home-card h2{
     font-family: "Orbitron", serif;
 }
 
-
 .profile-img img{
     width: 120px;
     height: auto;
@@ -234,6 +233,22 @@ section .home-card h1, section .home-card h2{
                 0 0 6cm 0.3px whitesmoke,
                 0 0 7px 0.3px rgb(220, 208, 208),
                 0 0 8px 0.3px rgb(220, 208, 208);
+}
+
+.home-card .social-media{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-card .social-media a{
+    display: flex;
+    justify-content: center;
+
+}
+
+.home-card .social-media img{
+    width: 60%;
 }
 
 section{

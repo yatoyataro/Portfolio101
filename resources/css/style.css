@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Teko:wght@300..700&display=swap');
 :root{
     --light_text: rgb(105, 255, 240);
-    --highlight_text: rgba(255, 18, 46, 0.971);
-    --midnight-green: #124559;
+    --highlight_text: rgba(255, 48, 72, 0.971);
+    --hight_red: rgba(210, 0, 25, 0.971);
+    --midnight-green: #1a5972;
 }
 
 /* ANIMATION FOR THE BACKGROUND */
@@ -46,6 +48,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    color: wheat;
 }
 
 body {
@@ -94,7 +97,7 @@ body {
   right: 0;
   height: 2px;
   background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
-  transform: translateX(50%) rotateZ(45deg); /* First diagonal line */
+  transform: translateX(50%) rotateZ(45deg);
   border-radius: 100%;
   animation: shining 3s ease-in-out infinite;
 }
@@ -106,34 +109,45 @@ body {
   right: 0;
   height: 2px;
   background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
-  transform: translateX(50%) rotateZ(-45deg); /* Second diagonal line */
+  transform: translateX(50%) rotateZ(-45deg);
   border-radius: 100%;
   animation: shining 3s ease-in-out infinite;
 }
 header{
-  font-family: "Teko", sans-serif;
-  padding: 10px 40px;
+    font-family: "Teko", sans-serif;
+    padding: 10px 40px;
+    z-index: 3;
+    position: fixed;
+    width: 100vw;
+    top: 0;
 }
 .logo a{
-  font-family: "Teko", sans-serif;
-  color: var(--light_text);
+    font-family: "Teko", sans-serif;
+    letter-spacing: 5px;
+    font-size: 1.5rem;
+    color: var(--light_text);
 }
 header a{
-  text-decoration: none;
-  color: var(--light_text);
-  z-index: 5;
+    text-decoration: none;
+    color: var(--light_text);
 }
 .header-container{
-  padding: 10px 20px;
+    padding: 10px 20px;
 }
 .menu ul{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  list-style: none;
-  text-align: end;
-  gap: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style: none;
+    text-align: end;
+    gap: 40px;
 }
+.menu ul li{
+    font-weight: 100;
+    letter-spacing: 2px;
+    display: inline;
+}
+
 .header{
   display: flex;
   flex-direction: row;
@@ -143,6 +157,83 @@ header a{
 
 main{
   font-family: "Poppins", sans-serif;
+  padding: 10px 40px;
+}
+
+#home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+section .home-container{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+section .home-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Orbitron", serif;
+    /* border: 2px solid var(--light_text); */
+    border-radius: 1rem;
+    padding: 20px 45px;
+    gap: 20px;
+    background-color: #090a0f;
+    /* box-shadow: 0 0 5px 2px wheat,
+                0 0 10px 2px wheat,
+                0 0 12px 2px wheat,
+                0 0 14px 2px wheat; */
+    transform: 
+        perspective(5000px)
+        rotateY(var(--rotateY))
+        rotateX(var(--rotateX));
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.home-card::before,
+.home-card::after{
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+}
+
+.home-card::before{
+    inset: 0.75rem;
+    background: black;
+    transform: translateZ(-49px);
+    filter: blur(18px);
+    opacity: 0.6;
+}
+
+.home-card::after{
+    inset: 0rem;
+    background:
+        linear-gradient(220deg, red, blue);
+    transform: translateZ(-50px);
+
+
+}
+
+section .home-card h1, section .home-card h2{
+    font-family: "Orbitron", serif;
+}
+
+
+.profile-img img{
+    width: 120px;
+    height: auto;
+    margin-top: -40px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px 0.3px whitesmoke,
+                0 0 6cm 0.3px whitesmoke,
+                0 0 7px 0.3px rgb(220, 208, 208),
+                0 0 8px 0.3px rgb(220, 208, 208);
 }
 
 section{

@@ -1,7 +1,7 @@
 const night = document.querySelector('.night');
 
 // Generate 20 shooting stars with random positions and delays
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 30; i++) {
   const star = document.createElement('div');
   star.classList.add('shooting_star');
 
@@ -20,3 +20,22 @@ for (let i = 0; i < 25; i++) {
 }
 
 
+const homeCard = document.querySelector('.home-card');
+
+document.addEventListener('mousemove', (event) => {
+    rotateElement(event, homeCard);
+});
+function rotateElement(event, element) {
+    const x = event.clientX;
+    const y = event.clientY;
+
+    const middleX = window.innerWidth / 2;
+    const middleY = window.innerHeight / 2;
+
+    const offsetX = ((x - middleX) / middleX) * 45;
+    const offsetY = ((y - middleY) / middleY) * 45;
+
+    element.style.setProperty("--rotateX", -1 * offsetY + "deg");
+    element.style.setProperty("--rotateY", offsetX + "deg");
+
+}

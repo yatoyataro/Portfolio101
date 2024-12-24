@@ -407,7 +407,34 @@ section:not(:nth-child(1)){
 
 
 
+@media (max-width: 481px) {
+  
+  section .home-container{
+    width: 90%;
+  }
+  section .home-card{
+    
+    transform: 
+        perspective(5000px)
+        rotateY(20deg)
+        rotateX(20deg);
+    transform-style: preserve-3d;
+    position: relative;
+    margin: 10px;
+  }
+  .menu{
+    display: none;
+  }
 
+  header{
+    backdrop-filter: blur(3px);
+  }
+
+  section .home-card h1, section .home-card h2{
+    font-size: 1.2rem;
+    width: 100%;
+  }
+}
 
 
 

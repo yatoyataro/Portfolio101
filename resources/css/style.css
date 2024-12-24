@@ -408,7 +408,9 @@ section:not(:nth-child(1)){
 
 
 @media (max-width: 481px) {
-  
+  #home{
+    padding-bottom: 10%;
+  }
   section .home-container{
     width: 90%;
   }

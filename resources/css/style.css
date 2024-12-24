@@ -213,10 +213,8 @@ section .home-card{
 .home-card::after{
     inset: 0rem;
     background:
-        linear-gradient(220deg, red, blue);
+        linear-gradient(220deg, rgb(2, 255, 188), rgb(144, 0, 255));
     transform: translateZ(-50px);
-
-
 }
 
 section .home-card h1, section .home-card h2{
@@ -224,16 +222,31 @@ section .home-card h1, section .home-card h2{
 }
 
 .profile-img img{
-    width: 120px;
+    width: 140px;
     height: auto;
     margin-top: -40px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border-radius: 50%;
-    box-shadow: 0 0 5px 0.3px whitesmoke,
-                0 0 6cm 0.3px whitesmoke,
-                0 0 7px 0.3px rgb(220, 208, 208),
-                0 0 8px 0.3px rgb(220, 208, 208);
+    box-shadow: 0 0 10px 0.3px whitesmoke,
+                0 0 15cm 0.3px whitesmoke,
+                0 0 20px 0.3px rgba(220, 208, 208, 0.259),
+                0 0 25px 0.3px rgba(220, 208, 208, 0.264);
+
+    animation: shining 3.5s ease-in-out infinite;
+    
 }
+
+@keyframes shining{
+    50%{
+        box-shadow: 0 0 1px 0.3px whitesmoke,
+                    0 0 3cm 0.3px whitesmoke,
+                    0 0 6px 0.3px rgba(220, 208, 208, 0.242),
+                    0 0 9px 0.3px rgba(220, 208, 208, 0.246);
+    }
+}
+
+
+
 
 .home-card .social-media{
     display: flex;
@@ -244,16 +257,158 @@ section .home-card h1, section .home-card h2{
 .home-card .social-media a{
     display: flex;
     justify-content: center;
-
+    padding: 0 0;
 }
 
 .home-card .social-media img{
     width: 60%;
+    transform-style: preserve-3d;
+    animation: rotateAngle 3s ease-in-out infinite;
 }
 
-section{
-    height: 100vh;
+.home-card .social-media img:hover{
+    scale: 1.3;
+    transform:
+        perspective(9000px)
+        rotateY(20deg)
+        rotateX(20deg);
+    transition: 0.3s ease-in-out;
+    filter: drop-shadow(0 0 10px var(--midnight-green));
 }
+
+@keyframes rotateAngle {
+	0% {
+		transform: rotateY(0deg) rotateX(10deg);
+		animation-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
+	}
+	25% {
+		transform: rotateY(20deg) rotateX(10deg);
+	}
+	50% {
+		transform: rotateY(0deg) rotateX(10deg);
+		animation-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
+	}
+	75% {
+		transform: rotateY(-20deg) rotateX(10deg);
+	}
+	100% {
+		transform: rotateY(0deg) rotateX(10deg);
+	}
+}
+
+
+
+section:not(:nth-child(1)){
+  min-height: 100vh;
+  background-color: rgba(178, 13, 13, 0.143);
+}
+
+.main-container section:nth-child(even){
+    background-color: rgba(0, 0, 0, 0.020);
+    backdrop-filter: blur(3px);
+
+}
+
+.about-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+    column-gap: 10px;
+    row-gap: 20px;
+
+    background-color: #090a0f10;
+    height: auto;
+    min-height: 100vh;
+    padding: 3% 5%;
+    position: relative;
+}
+
+.about-card .card{
+    flex: 0 1 30%;
+    height: 500px;
+    width: 20%;
+    min-width: 330px;
+    max-width: 350px;
+    border-radius: 10px;
+    background-color: rgba(50, 122, 184, 0.412);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+}
+
+/* .about-card .card:hover{
+  transform: scale(1.1);
+  transition: 0.5s ease;
+} */
+.card-container{
+  display: inherit;
+  column-gap: 10px;
+}
+
+.card-container:hover>
+:not(:hover){
+  transition: all 0.5s ease-in-out;
+  opacity: 0.5;
+}
+
+.about-card .card .card-content{
+  padding: 2px 20px ;
+  text-overflow: clip;
+}
+
+.about-card .card img{
+    width: 100%;
+    height:100px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 10px 0.3px rgba(148, 148, 148, 0.598),
+                0 0 15cm 0.3px rgba(165, 165, 165, 0.648),
+                0 0 20px 0.3px rgba(220, 208, 208, 0.475),
+                0 0 25px 0.3px rgba(220, 208, 208, 0.445);
+
+}
+.card .sparkle{
+  animation:sparkle 1s infinite;
+  color:#91e2ff;
+  font-size:30px;
+  position:absolute;
+  top:0px;
+  left:5px;
+  transform:rotate(45deg) ;
+  -webkit-text-stroke:2px #000;
+  -moz-text-stroke:2px #000;
+  -ms-text-stroke:2px #000;
+}
+
+@keyframes sparkle{
+    0%{
+      transform:scale(1) rotate(0deg);
+      opacity:1
+    }
+    50%{
+      transform:scale(1.5) rotate(180deg);
+      opacity:1
+    }
+    100%{
+      transform:scale(0.5) rotate(360deg);
+      opacity:0
+    }
+  }
+
+.about-card .card h1{
+    font-family: "Orbitron", serif;
+    margin: 5px 0;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+
+
+
+
+
 
 
   

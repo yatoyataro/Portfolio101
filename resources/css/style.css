@@ -415,7 +415,7 @@ section:not(:nth-child(1)){
     width: 90%;
   }
   section .home-card{
-    
+    width: 100%;
     transform: 
         perspective(5000px)
         rotateY(20deg)

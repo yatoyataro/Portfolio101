@@ -1,7 +1,18 @@
 const night = document.querySelector('.night');
-
+let numStars = 0;
 // Generate 20 shooting stars with random positions and delays
-for (let i = 0; i < 25; i++) {
+if (screen.width <700) {
+  numStars = 15;
+  if (screen.width <480) {
+    const sparkle = document.querySelector('.sparkle');
+    sparkle.style.display = 'none';
+  }
+}else{
+  numStars = 25;
+}
+
+
+for (let i = 0; i < numStars; i++) {
   const star = document.createElement('div');
   star.classList.add('shooting_star');
 

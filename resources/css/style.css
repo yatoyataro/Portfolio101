@@ -42,6 +42,15 @@
   }
 }
 
+/* for the profile image */
+@keyframes shining{
+    50%{
+        box-shadow: 0 0 1px 0.3px whitesmoke,
+                    0 0 3cm 0.3px whitesmoke,
+                    0 0 6px 0.3px rgba(220, 208, 208, 0.242),
+                    0 0 9px 0.3px rgba(220, 208, 208, 0.246);
+    }
+}
 
 *{
     margin: 0;
@@ -236,17 +245,25 @@ section .home-card h1, section .home-card h2{
     
 }
 
-@keyframes shining{
-    50%{
-        box-shadow: 0 0 1px 0.3px whitesmoke,
-                    0 0 3cm 0.3px whitesmoke,
-                    0 0 6px 0.3px rgba(220, 208, 208, 0.242),
-                    0 0 9px 0.3px rgba(220, 208, 208, 0.246);
-    }
+.text-box1{
+    opacity: 0;
 }
 
+.text-box2{
+    opacity: 0;
+}
 
-
+@keyframes fadebox1 {
+    0%{
+        opacity: 0;
+    }
+    20%{
+        opacity: 1;
+    }
+    30%{
+        opacity: 0;
+    }
+}
 
 .home-card .social-media{
     display: flex;
@@ -338,10 +355,6 @@ section:not(:nth-child(1)){
     overflow: hidden;
 }
 
-/* .about-card .card:hover{
-  transform: scale(1.1);
-  transition: 0.5s ease;
-} */
 .card-container{
   display: inherit;
   column-gap: 10px;
@@ -407,7 +420,7 @@ section:not(:nth-child(1)){
 
 
 
-@media (max-width: 481px) {
+@media (max-width: 780px) {
   #home{
     padding-bottom: 10%;
   }

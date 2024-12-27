@@ -26,7 +26,7 @@
     width: 0;
   }
   50% {
-    width: 30px;
+    width: 50px;
   }
   100% {
     width: 0;
@@ -185,7 +185,7 @@ header a{
   transition: transform 0.5s ease-in-out;
 }
 
-.header input:checked ~ .menu-container img{
+.header input:checked ~ .header input + .menu-container img{
   transform: translateX(-100%);
   transition: transform 0.5s ease-in-out;
 }

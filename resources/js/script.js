@@ -1,6 +1,6 @@
 const night = document.querySelector('.night');
 let numStars = 0;
-// Generate 20 shooting stars with random positions and delays
+
 if (screen.width <700) {
   numStars = 15;
   if (screen.width <480) {
@@ -8,7 +8,7 @@ if (screen.width <700) {
     sparkle.style.display = 'none';
   }
 }else{
-  numStars = 25;
+  numStars = 20;
 }
 
 
@@ -19,7 +19,7 @@ for (let i = 0; i < numStars; i++) {
   // Randomize positions
   const topPosition = Math.random() * 100; // Random percentage for top
   const leftPosition = Math.random() * 100; // Random percentage for left
-  const delay = Math.random() * 9; // Random delay between 0-5 seconds
+  const delay = Math.random() * 25; // Random delay between 0-10 seconds
 
   // Apply the random styles
   star.style.top = `${topPosition}vh`;

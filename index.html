@@ -6,6 +6,8 @@
     <title>Portfolio</title>
     <link rel="icon" href="images/favicon/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="resources/css/style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <div class="night"> </div>
@@ -112,44 +114,112 @@
                 </div>
             </section>
             <section id="skills">
-                <h2>Skills</h2>
-                <div class="skills-container">
-                    <div class="skill-card">
-                        <h3>Programming Languages</h3>
-                        <ul>
-                            <li>JavaScript</li>
-                            <li>Python</li>
-                            <li>Java</li>
-                            <li>C++</li>
-                            <li>C#</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Frameworks and Libraries</h3>
-                        <ul>
-                            <li>React</li>
-                            <li>Angular</li>
-                            <li>Node.js</li>
-                            <li>Django</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Tools and Technologies</h3>
-                        <ul>
-                            <li>Git/GitHub</li>
-                            <li>Docker</li>
-                            <li>Jenkins</li>
-                            <li>AWS</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Databases</h3>
-                        <ul>
-                            <li>MySQL</li>
-                            <li>MongoDB</li>
-                            <li>PostgreSQL</li>
-                            <li>SQLite</li>
-                        </ul>
+                <!-- Constellation Canvas Layer -->
+                <canvas id="skillsConstellation" class="constellation-canvas"></canvas>
+                <div class="skills-section">
+                    <h2 class="skills-title">Technical Skills</h2>
+                    <div class="skills-grid">
+                        <!-- Programming Languages -->
+                        <div class="skill-item" data-skill="PHP">
+                            <div class="skill-icon">
+                                <i class="fab fa-php"></i>
+                            </div>
+                            <span class="skill-name">PHP</span>
+                        </div>
+                        <div class="skill-item" data-skill="JavaScript">
+                            <div class="skill-icon">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <span class="skill-name">JavaScript</span>
+                        </div>
+                        <div class="skill-item" data-skill="Java">
+                            <div class="skill-icon">
+                                <i class="fab fa-java"></i>
+                            </div>
+                            <span class="skill-name">Java</span>
+                        </div>
+                        <div class="skill-item" data-skill="Kotlin">
+                            <div class="skill-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <span class="skill-name">Kotlin</span>
+                        </div>
+                        <div class="skill-item" data-skill="TypeScript">
+                            <div class="skill-icon">
+                                <i class="fas fa-file-code"></i>
+                            </div>
+                            <span class="skill-name">TypeScript</span>
+                        </div>
+                        <div class="skill-item" data-skill="Python">
+                            <div class="skill-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <span class="skill-name">Python</span>
+                        </div>
+                        <div class="skill-item" data-skill="C++">
+                            <div class="skill-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <span class="skill-name">C++</span>
+                        </div>
+
+                        <!-- Frameworks and Web Technologies -->
+                        <div class="skill-item" data-skill="Laravel">
+                            <div class="skill-icon">
+                                <i class="fab fa-laravel"></i>
+                            </div>
+                            <span class="skill-name">Laravel</span>
+                        </div>
+                        <div class="skill-item" data-skill="Next.js">
+                            <div class="skill-icon">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                            <span class="skill-name">Next.js</span>
+                        </div>
+                        <div class="skill-item" data-skill="React Native">
+                            <div class="skill-icon">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <span class="skill-name">React Native</span>
+                        </div>
+                        <div class="skill-item" data-skill="Tailwind CSS">
+                            <div class="skill-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <span class="skill-name">Tailwind CSS</span>
+                        </div>
+
+                        <!-- Tools and Cloud -->
+                        <div class="skill-item" data-skill="Git">
+                            <div class="skill-icon">
+                                <i class="fab fa-git-alt"></i>
+                            </div>
+                            <span class="skill-name">Git</span>
+                        </div>
+                        <div class="skill-item" data-skill="MySQL">
+                            <div class="skill-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <span class="skill-name">MySQL</span>
+                        </div>
+                        <div class="skill-item" data-skill="Supabase">
+                            <div class="skill-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <span class="skill-name">Supabase</span>
+                        </div>
+                        <div class="skill-item" data-skill="AWS">
+                            <div class="skill-icon">
+                                <i class="fab fa-aws"></i>
+                            </div>
+                            <span class="skill-name">AWS</span>
+                        </div>
+                        <div class="skill-item" data-skill="Ollama">
+                            <div class="skill-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <span class="skill-name">Ollama</span>
+                        </div>
                     </div>
                 </div>
             </section>

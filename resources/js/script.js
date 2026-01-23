@@ -2,7 +2,7 @@ const night = document.querySelector('.night');
 let numStars = 0;
 
 if (screen.width <700) {
-  numStars = 15;
+  numStars = 5;
   if (screen.width <480) {
     const sparkle = document.querySelector('.sparkle');
     sparkle.style.display = 'none';
@@ -70,7 +70,7 @@ if (canvas) {
     { from: 'Tailwind CSS', to: 'React Native' },
     { from: 'Git', to: 'AWS' },
     { from: 'MySQL', to: 'Supabase' },
-    { from: 'Kotlin', to: 'Java' },
+    { from: 'Kotlin', to: 'Java' }, 
   ];
 
   let skillPositions = new Map();
@@ -156,6 +156,212 @@ if (canvas) {
     item.addEventListener('mouseleave', () => {
       hoveredSkill = null;
       calculateConnections(null);
+    });
+  });
+}
+
+// ==================== PROJECTS DATA (Source of Truth) ====================
+const projects = [
+  {
+    id: 1,
+    title: "LarahBigDeck",
+    image: "/images/backgrounds/larahbigdeck-cover.jpg",
+    description: "A Flashcard Learning App with AI integration.",
+    stack: ["Next.js", "TypeScript", "Supabase", "Google Gemini"],
+    links: {
+      demo: "#",
+      source: "#"
+    }
+  },
+  {
+    id: 2,
+    title: "Bong Dental Clinic",
+    image: "/assets/bongdental-cover.png",
+    description: "A web-based booking system for a dental clinic.",
+    stack: ["HTML", "CSS", "JavaScript (Vanilla)"],
+    links: {
+      demo: "https://yatoyataro.github.io/Bong-Dental-Clinic/"
+    }
+  },
+  {
+    id: 3,
+    title: "Calamansee (Android AI)",
+    image: "/assets/calamansee-cover.png",
+    description: "On-device disease detection app with custom CameraX backend and TFLite inference.",
+    stack: ["Kotlin", "Android Jetpack", "CameraX", "TensorFlow Lite", "Room"],
+    links: {
+      source: "#"
+    }
+  }
+];
+
+// ==================== PROJECTS RENDERING ====================
+function renderProjects() {
+  const projectsSection = document.getElementById('projects-section');
+  if (!projectsSection) return;
+
+  const projectsGrid = projectsSection.querySelector('.projects-grid');
+  if (!projectsGrid) return;
+
+  projectsGrid.innerHTML = '';
+
+  projects.forEach(project => {
+    // Create entrance wrapper
+    const entranceWrapper = document.createElement('div');
+    entranceWrapper.className = 'card-entrance-wrapper';
+
+    const projectCard = document.createElement('article');
+    projectCard.className = 'project-card';
+
+    // Card Visual
+    const cardVisual = document.createElement('div');
+    cardVisual.className = 'card-visual';
+    const img = document.createElement('img');
+    img.src = project.image;
+    img.alt = project.title;
+    cardVisual.appendChild(img);
+
+    // Card Content
+    const cardContent = document.createElement('div');
+    cardContent.className = 'card-content';
+
+    const title = document.createElement('h3');
+    title.textContent = project.title;
+
+    const description = document.createElement('p');
+    description.textContent = project.description;
+
+    const techStack = document.createElement('div');
+    techStack.className = 'tech-stack';
+    project.stack.forEach(tech => {
+      const techItem = document.createElement('span');
+      techItem.className = 'tech-item';
+      techItem.textContent = tech;
+      techStack.appendChild(techItem);
+    });
+
+    cardContent.appendChild(title);
+    cardContent.appendChild(description);
+    cardContent.appendChild(techStack);
+
+    // Card Actions
+    const cardActions = document.createElement('div');
+    cardActions.className = 'card-actions';
+
+    if (project.links.demo) {
+      const demoBtn = document.createElement('a');
+      demoBtn.href = project.links.demo;
+      demoBtn.className = 'btn-demo';
+      demoBtn.textContent = 'Live Demo';
+      demoBtn.target = '_blank';
+      cardActions.appendChild(demoBtn);
+    }
+
+    if (project.links.source) {
+      const sourceBtn = document.createElement('a');
+      sourceBtn.href = project.links.source;
+      sourceBtn.className = 'btn-source';
+      sourceBtn.textContent = 'Source Code';
+      sourceBtn.target = '_blank';
+      cardActions.appendChild(sourceBtn);
+    }
+
+    projectCard.appendChild(cardVisual);
+    projectCard.appendChild(cardContent);
+    projectCard.appendChild(cardActions);
+
+    entranceWrapper.appendChild(projectCard);
+    projectsGrid.appendChild(entranceWrapper);
+  });
+}
+
+// Initialize projects on page load
+document.addEventListener('DOMContentLoaded', () => {
+  renderProjects();
+  initializeEntranceAnimation();
+  initialize3DTilt();
+});
+
+// ==================== CINEMATIC ENTRANCE ANIMATION ====================
+function initializeEntranceAnimation() {
+  const wrappers = document.querySelectorAll('.card-entrance-wrapper');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+  
+  // Observe each wrapper with staggered delay
+  wrappers.forEach((wrapper, index) => {
+    wrapper.style.transitionDelay = (index * 150) + 'ms';
+    observer.observe(wrapper);
+  });
+}
+
+// ==================== 3D TILT PHYSICS ENGINE ====================
+function initialize3DTilt() {
+  const projectCards = document.querySelectorAll('.project-card');
+  const projectsGrid = document.querySelector('.projects-grid');
+  
+  projectCards.forEach(card => {
+    let rafId = null;
+    
+    // Mouse Enter - Enable instant movement and focus mode
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'none';
+      card.classList.add('hover-active');
+      // Add focus class to grid to trigger blur on other cards
+      if (projectsGrid) {
+        projectsGrid.classList.add('card-focused');
+      }
+    });
+    
+    // Mouse Move - Apply 3D tilt with requestAnimationFrame
+    card.addEventListener('mousemove', (e) => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      
+      rafId = requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        
+        // Calculate position relative to card center
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const mouseX = e.clientX - centerX;
+        const mouseY = e.clientY - centerY;
+        
+        // Calculate rotation angles (max 10 degrees)
+        const rotateY = (mouseX / (rect.width / 2)) * 10;
+        const rotateX = -(mouseY / (rect.height / 2)) * 10;
+        
+        // Apply 3D transform
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+    });
+    
+    // Mouse Leave - Smooth reset and remove focus mode
+    card.addEventListener('mouseleave', () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      
+      card.style.transition = 'transform 0.5s ease';
+      card.style.transform = 'none';
+      card.classList.remove('hover-active');
+      
+      // Remove focus class from grid
+      if (projectsGrid) {
+        projectsGrid.classList.remove('card-focused');
+      }
     });
   });
 }

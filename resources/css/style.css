@@ -162,6 +162,13 @@ header a{
   padding-right: 20px;
 }
 
+.menu-container{
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 5;
+}
+
 .menu-container img{
   width: 20px;
   cursor: pointer;
@@ -293,13 +300,10 @@ section .home-card h1, section .home-card h2{
     margin-top: -40px;
     margin-bottom: 20px;
     border-radius: 50%;
-    box-shadow: 0 0 10px 0.3px whitesmoke,
-                0 0 15cm 0.3px whitesmoke,
-                0 0 20px 0.3px rgba(220, 208, 208, 0.259),
-                0 0 25px 0.3px rgba(220, 208, 208, 0.264);
-
-    animation: shining 3.5s ease-in-out infinite;
-    
+    box-shadow: 0 0 2px 0.3px whitesmoke,
+                0 0 5cm 0.3px whitesmoke,
+                0 0 7px 0.3px rgba(220, 208, 208, 0.259),
+                0 0 10px 0.3px rgba(220, 208, 208, 0.264);
 }
 .text-wrapper{
     text-align: center;
@@ -636,7 +640,253 @@ section:not(:nth-child(1)){
   }
 }
 
+/* ==================== PROJECTS SECTION ==================== */
+#projects-section {
+  min-height: 100vh;
+  padding: 60px 20px;
+  perspective: 1000px;
+  position: relative;
+  z-index: 1;
+}
 
+.projects-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.projects-title {
+  font-family: "Orbitron", serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 50px;
+  color: var(--light_text);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
+
+/* ==================== PROJECT CARD CHASSIS (Deep Space Glass) ==================== */
+.project-card {
+  background: rgba(16, 16, 32, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(105, 255, 240, 0.15);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  transition: filter 0.4s ease, opacity 0.4s ease, box-shadow 0.3s ease;
+  /* GPU Optimization */
+  will-change: transform;
+  transform: translateZ(0);
+  transform-style: preserve-3d;
+}
+
+/* ==================== FOCUS MODE (The Spotlight) ==================== */
+/* When a card is being hovered, blur/dim ALL cards by default */
+.projects-grid.card-focused .project-card {
+  filter: blur(1px) brightness(0.9);
+}
+
+/* BUT, keep the specific card being hovered SHARP and BRIGHT */
+.projects-grid.card-focused .project-card:hover {
+  filter: blur(0) brightness(1);
+  opacity: 1;
+  z-index: 10;
+  box-shadow: 0 8px 40px rgba(105, 255, 240, 0.3), 0 0 0 1px rgba(105, 255, 240, 0.3);
+}
+
+/* ==================== THE "MONITOR" SCREEN ==================== */
+.card-visual {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid rgba(105, 255, 240, 0.1);
+  cursor: default;
+  position: relative;
+  /* GPU Optimization */
+  will-change: transform;
+  transform: translateZ(0);
+  pointer-events: auto;
+}
+
+/* Scanner Animation */
+.card-visual::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, cyan, transparent);
+  box-shadow: 0 0 10px cyan, 0 0 20px cyan;
+  opacity: 0.6;
+  pointer-events: none;
+  will-change: top, opacity;
+  animation: scanDown 4s linear infinite;
+}
+
+@keyframes scanDown {
+  0% {
+    top: -10%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 110%;
+    opacity: 0;
+  }
+}
+
+.card-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==================== CONTENT FLEX ENGINE ==================== */
+.card-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  /* Ghost Protocol - Prevents mouse interference */
+  pointer-events: none;
+}
+
+.card-content h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: white;
+  margin: 0 0 0.5rem;
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(200, 200, 255, 0.8);
+  margin-bottom: 15px;
+}
+
+/* ==================== TECH STACK (HUD Badges) ==================== */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.tech-item {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  background: rgba(105, 255, 240, 0.05);
+  border: 1px solid rgba(105, 255, 240, 0.2);
+  border-radius: 50px;
+  color: var(--light_text);
+  animation: techPulse 3s ease-in-out infinite;
+}
+
+@keyframes techPulse {
+  0%, 100% {
+    border-color: rgba(105, 255, 240, 0.2);
+    box-shadow: 0 0 0 rgba(105, 255, 240, 0);
+  }
+  50% {
+    border-color: rgba(105, 255, 240, 0.4);
+    box-shadow: 0 0 8px rgba(105, 255, 240, 0.3);
+  }
+}
+
+/* ==================== CONTROL PANEL (The Controls) ==================== */
+.card-actions {
+  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: auto;
+}
+
+.card-actions a {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-demo {
+  background: rgba(105, 255, 240, 0.1);
+  border: 1px solid rgba(105, 255, 240, 0.5);
+  color: var(--light_text);
+}
+
+.btn-demo:hover {
+  background: var(--light_text);
+  color: #090a0f;
+  box-shadow: 0 0 15px rgba(105, 255, 240, 0.5);
+}
+
+.btn-source {
+  background: transparent;
+  border: 1px solid rgba(255, 100, 100, 0.5);
+  color: rgba(255, 100, 100, 0.9);
+}
+
+.btn-source:hover {
+  background: rgba(255, 100, 100, 0.9);
+  color: #090a0f;
+  box-shadow: 0 0 15px rgba(255, 100, 100, 0.5);
+}
+
+/* ==================== CINEMATIC ENTRANCE ANIMATION ==================== */
+.card-entrance-wrapper {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card-entrance-wrapper.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==================== MOBILE ADJUSTMENTS ==================== */
+@media (max-width: 480px) {
+  .card-actions {
+    grid-template-columns: 1fr;
+  }
+}
 
 
 @media (max-width: 780px) {

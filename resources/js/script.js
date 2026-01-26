@@ -1,14 +1,50 @@
+// ==================== ORBITAL MENU TOGGLE ====================
+const burgerBtn = document.querySelector('label[for="check"]');
+const closeBtn = document.querySelector('.menu-close-btn');
+const menu = document.querySelector('.orbital-menu');
+const menuLinks = document.querySelectorAll('.orbital-menu a');
+
+// Open menu
+if (burgerBtn) {
+  burgerBtn.addEventListener('click', () => {
+    menu.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  });
+}
+
+// Close menu
+if (closeBtn) {
+  closeBtn.addEventListener('click', () => {
+    menu.classList.remove('is-active');
+    document.body.style.overflow = '';
+  });
+}
+
+// Close menu when clicking links
+menuLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    menu.classList.remove('is-active');
+    document.body.style.overflow = '';
+  });
+});
+
+// ==================== SHOOTING STARS ANIMATION ====================
 const night = document.querySelector('.night');
 let numStars = 0;
 
-if (screen.width <700) {
-  numStars = 5;
-  if (screen.width <480) {
-    const sparkle = document.querySelector('.sparkle');
-    sparkle.style.display = 'none';
-  }
-}else{
-  numStars = 20;
+// Ultra-aggressive reduction for mobile performance
+if (screen.width < 480) {
+  numStars = 2; // Minimal stars for small phones
+} else if (screen.width < 768) {
+  numStars = 3; // Still minimal for tablets
+} else {
+  numStars = 15; // Reduced from 20 for better performance
+}
+
+// Hide sparkle animation on all mobile
+if (screen.width < 768) {
+  const sparkles = document.querySelectorAll('.sparkle');
+  sparkles.forEach(sparkle => sparkle.style.display = 'none');
 }
 
 
@@ -33,9 +69,21 @@ for (let i = 0; i < numStars; i++) {
 
 const homeCard = document.querySelector('.home-card');
 
-document.addEventListener('mousemove', (event) => {
+// ==================== TOUCH DEVICE DETECTION ====================
+// Only enable 3D tilt on desktop devices with mouse input
+const isTouchDevice = () => {
+  return (('ontouchstart' in window) ||
+     (navigator.maxTouchPoints > 0) ||
+     (navigator.msMaxTouchPoints > 0));
+};
+
+// CRITICAL: Only attach physics on desktop
+if (!isTouchDevice() && homeCard) {
+  document.addEventListener('mousemove', (event) => {
     rotateElement(event, homeCard);
-});
+  });
+}
+
 function rotateElement(event, element) {
     const x = event.clientX;
     const y = event.clientY;
@@ -48,12 +96,15 @@ function rotateElement(event, element) {
 
     element.style.setProperty("--rotateX", -1 * offsetY + "deg");
     element.style.setProperty("--rotateY", offsetX + "deg");
-
 }
 
 // ==================== CONSTELLATION LOGIC ====================
 const canvas = document.getElementById('skillsConstellation');
-if (canvas) {
+
+// PERFORMANCE: Disable constellation on mobile devices
+const isMobile = window.innerWidth <= 768;
+
+if (canvas && !isMobile) {
   const ctx = canvas.getContext('2d');
 
   // Define skill connections (based on CV technology relationships)
@@ -129,11 +180,24 @@ if (canvas) {
   // Initial draw
   setTimeout(() => calculateConnections(), 100);
 
-  // Redraw on window resize
+  // Redraw on window resize - THROTTLED
   let resizeTimeout;
+  let lastResizeTime = 0;
+  
   window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => calculateConnections(hoveredSkill), 150);
+    const now = Date.now();
+    
+    // Throttle: Maximum once every 250ms during resize
+    if (now - lastResizeTime < 250) {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        calculateConnections(hoveredSkill);
+        lastResizeTime = Date.now();
+      }, 250);
+    } else {
+      calculateConnections(hoveredSkill);
+      lastResizeTime = now;
+    }
   });
 
   // Redraw when scrolling into view (for initial load)

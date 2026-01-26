@@ -97,6 +97,120 @@ body {
   animation: shining 3s ease-in-out infinite;
 }
 
+/* ==================== ORBITAL MENU SIDEBAR ==================== */
+.orbital-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 350px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  /* Phase 2: Orbital Glass Styling */
+  background: rgba(16, 16, 32, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 2px solid cyan;
+  box-shadow: -10px 0 30px rgba(0, 255, 255, 0.15);
+  padding: 3rem 2rem;
+  /* Phase 4: Hide by default */
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.orbital-menu.is-active {
+  transform: translateX(0);
+}
+
+.menu-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.menu-close-btn:hover {
+  color: cyan;
+  text-shadow: 0 0 10px cyan;
+  transform: rotate(90deg);
+}
+
+.orbital-menu ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.orbital-menu a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  display: block;
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.orbital-menu a:hover {
+  color: cyan;
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.1), transparent);
+  border-left: 3px solid cyan;
+  padding-left: 1rem;
+}
+
+/* ==================== MOBILE RESPONSIVE MENU ==================== */
+@media (max-width: 768px) {
+  .orbital-menu {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%);
+    border-left: none;
+    border-bottom: 2px solid cyan;
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.15);
+  }
+
+  .orbital-menu.is-active {
+    transform: translateY(0);
+  }
+}
+
+/* ==================== BURGER BUTTON ==================== */
+.menu-container {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 100;
+  display: block;
+}
+
+.menu-container label {
+  display: block;
+  cursor: pointer;
+}
+
+.menu-container img {
+  width: 20px;
+  cursor: pointer;
+  scale: 2.5;
+  transition: transform 0.3s ease;
+}
+
+.menu-container img:hover {
+  transform: scale(1.1);
+}
+
 
 
 .shooting_star::before {
@@ -149,76 +263,29 @@ header a{
 .header-container{
     padding: 10px 20px;
 }
-.menu{
-  background-color: rgba(28, 0, 23, 0.417);
-  height: 100vh;
-  width: auto;
-  min-width: 170px;
-  right: 0;
-  top: 0;
-  position: fixed;
-  transform: translateX(100%);
-  transition: transform 0.5s ease-in-out;
-  padding-right: 20px;
-}
 
-.menu-container{
+.menu-container {
   position: fixed;
   right: 20px;
   top: 20px;
-  z-index: 5;
+  z-index: 100;
+  display: block;
 }
 
-.menu-container img{
+.menu-container label {
+  display: block;
+  cursor: pointer;
+}
+
+.menu-container img {
   width: 20px;
   cursor: pointer;
   scale: 2.5;
-  position: fixed;
-  right: 20px;
-  top: 20px;
-  z-index: 3;
-  transform: translateX(0);
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.3s ease;
 }
 
-.header input {
-  display: none;
-  position: relative;
-  cursor: pointer;
-  scale: 2.5;
-  position: fixed;
-  right: 20px;
-  top: 20px;
-  z-index: 3;
-  transform: translateX(0);
-  transition: transform 0.5s ease-in-out;
-}
-
-.header input:checked ~ .menu{
-  transform: translateX(0);
-  transition: transform 0.5s ease-in-out;
-}
-
-.header input:checked ~ .header input + .menu-container img{
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in-out;
-}
-
-
-
-.menu ul{
-    padding-top: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    list-style: none;
-    text-align: end;
-    gap: 40px;
-}
-.menu ul li{
-    font-weight: 100;
-    letter-spacing: 2px;
-    display: inline;
+.menu-container img:hover {
+  transform: scale(1.1);
 }
 
 .header{
@@ -913,8 +980,117 @@ section:not(:nth-child(1)){
   }
 }
 
+/* ==================== MOBILE PERFORMANCE MODE ==================== */
+/* Disable expensive visual effects on mobile to maintain 60fps */
 
-
-
-
+@media (max-width: 768px) {
   
+  /* DISABLE ALL BACKDROP FILTERS */
+  .orbital-menu,
+  .skill-item,
+  .project-card,
+  .about-card .card,
+  .main-container section:nth-child(even) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* REPLACE WITH SOLID BACKGROUNDS */
+  .orbital-menu {
+    background: rgba(16, 16, 32, 0.95); /* More opaque = no blur needed */
+  }
+
+  .skill-item {
+    background: rgba(10, 10, 26, 0.85);
+  }
+
+  .project-card {
+    background: rgba(16, 16, 32, 0.90);
+  }
+
+  .about-card .card {
+    background-color: rgba(50, 122, 184, 0.75);
+  }
+
+  .main-container section:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+
+  /* DISABLE 3D TRANSFORMS ON MOBILE */
+  section .home-card {
+    transform: none !important;
+    transform-style: flat !important;
+  }
+
+  .home-card::before,
+  .home-card::after {
+    display: none; /* Remove 3D shadow layers */
+  }
+
+  .home-card .social-media img {
+    transform-style: flat !important;
+    animation: none !important; /* Disable rotate animation */
+  }
+
+  .home-card .social-media img:hover {
+    transform: scale(1.15) !important; /* Simple scale only */
+    filter: none !important; /* Remove drop-shadow filter */
+  }
+
+  /* DISABLE PROJECT CARD 3D LAYERS */
+  .project-card {
+    will-change: auto !important;
+    transform: none !important;
+    transform-style: flat !important;
+  }
+
+  .card-visual {
+    will-change: auto !important;
+    transform: none !important;
+  }
+
+  /* REDUCE BOX-SHADOW COMPLEXITY */
+  .profile-img img {
+    box-shadow: 0 0 15px rgba(200, 200, 255, 0.5); /* Single simple shadow */
+  }
+
+  .about-card .card img {
+    box-shadow: 0 0 10px rgba(165, 165, 165, 0.4); /* Single simple shadow */
+  }
+
+  /* DISABLE SCANNER ANIMATION ON MOBILE */
+  .card-visual::after {
+    display: none; /* Scanner line is expensive on mobile */
+  }
+
+  /* DISABLE TECH BADGE PULSE */
+  .tech-item {
+    animation: none !important;
+  }
+
+  /* SIMPLIFY SKILL HOVER */
+  .skill-item:hover {
+    transform: translateY(-2px) !important; /* Simpler than scale */
+    box-shadow: 0 0 10px rgba(105, 255, 240, 0.3);
+  }
+}
+
+/* EVEN MORE AGGRESSIVE FOR VERY SMALL SCREENS */
+@media (max-width: 480px) {
+  
+  /* DISABLE FILTER BLUR ON FOCUS MODE */
+  .projects-grid.card-focused .project-card {
+    filter: brightness(0.9) !important; /* Remove blur */
+  }
+
+  /* DISABLE ALL GLOW EFFECTS */
+  .skill-item:hover {
+    box-shadow: none !important;
+  }
+
+  /* REDUCE ANIMATION COMPLEXITY */
+  .text-box1,
+  .text-box2 {
+    animation-duration: 15s !important; /* Slower = less frequent repaints */
+  }
+}
